@@ -16,11 +16,13 @@ venv: $(VENV_DIR)/marker
 
 clean:
 	rm -rf $(VENV_DIR)
+	find apps -type d -name '__pycache__' -delete
+	rm -f db.sqlite3
 
 migrate:
 	$(PYTHON) manage.py migrate
 
-runserver: venv
+runserver: venv migrate
 	$(PYTHON) manage.py runserver
 
 format: venv
